@@ -23,3 +23,7 @@ console.log(true + null)
 console.log(false + null)
 // ('', 0 ,undefined, null) 转成Boolean为false, 其他均为true
 // 短路非和短路与如果第一个表达式能确定结果就将第一个表达式的结果返回, 如果不能那么就继续判断后面的表达式, 如果表达式能确定结果就将返回值返回
+let num = 0 && 13; // false && true
+console.log(num); // 0
+let num2 = 12 || 13; // true || true
+console.log(num2); // 12
