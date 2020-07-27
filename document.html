@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>document</title>
+  <style>
+    li[lid='java'] {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <span id="text">文章, 经国之大业, 不朽之盛世</span>
+  <ul>
+    <li>JavaScript</li>
+    <li>JavaScript</li>
+    <li>JavaScript</li>
+    <li>JavaScript</li>
+    <li>JavaScript</li>
+  </ul>
+  <ul id="java">
+    <li lid="java">Java</li>
+    <li lid="java">Java</li>
+    <li>Java</li>
+    <li>Java</li>
+    <li>Java</li>
+  </ul>
+  <span class="abc">abc</span>
+  <span class="abc">abc</span>
+  <span class="abc">abc</span>
+  <script type="text/javascript">
+    // 根据id选择document元素
+    const text = document.getElementById("text");
+    // 在控制台打印document内容
+    console.log(text);
+    // 在控制台打印document对象的属性
+    console.dir(text);
+
+    // 根据标签名选择元素, 返回是个伪数组, 选中整个网页的指定标签元素
+    const lis = document.getElementsByTagName("li");
+    console.log(lis.length);
+    console.log(lis);
+
+    // element.getElementsByTagName 选择指定元素内的指定标签的元素
+    // 还有element.getElementsByClassName
+    const java = document.getElementById("java");
+    console.log(java.getElementsByTagName("li"));
+
+    // 根据类名选择元素, 返回是个伪数组
+    const classes = document.getElementsByClassName("abc");
+    console.log(classes);
+
+    // 使用css的选择器选择元素
+    // document.querySelector()返回第一个被选中的元素
+    // document.querySelectorAll()返回全部被选中的元素
+    console.log(document.querySelector('li[lid=\'java\']'));
+    console.dir(document.querySelector('li[lid=\'java\']'));
+
+    console.log(document.querySelectorAll('li[lid=\'java\']'));
+    console.dir(document.querySelectorAll('li[lid=\'java\']'));
+
+    // 获得body
+    console.log(document.body);
+    console.dir(document.body);
+
+    // 获得html
+    console.log(document.documentElement);
+    console.dir(document.documentElement);
+  </script>
+</body>
+</html>
