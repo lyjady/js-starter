@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event</title>
+</head>
+<body>
+  <button id="btn">click me</button>
+  <button id="spanText">change span content innerText</button>
+  <button id="spanHtml">change span content innerHTML</button>
+  <span>
+    span tag
+    <span>sub span tag</span>
+  </span>
+  <script type="text/javascript">
+    // 为按钮绑定点击事件
+    const btn = document.getElementById('btn')
+    btn.onclick = () => console.log('我被点击了')
+    // innerText获取元素的内容, 或者改变元素的内容, 但是无法识别html标签, 如果内容有标签那么获取时会将标签忽略, 如果设置元素内容里面包含html标签那么会直接显示标签文本, 并且还会忽略多余的空格和换行符
+    const spanEle = document.querySelector('span')
+    // 获取元素的内容
+    console.log(spanEle.innerText)
+    // innerHtml和innerText类似, 但是innerHtml能够识别html标签, 不会忽略多余的空格和换行符
+    console.log(spanEle.innerHTML)
+    // 改变元素内容 innerText无法识别html标签
+    const span = document.getElementById('spanText')
+    span.onclick = () => spanEle.innerText = '<b>changed span</b>'
+    // innerHTML能够识别元素内容
+    document.getElementById('spanHtml').onclick = () => spanEle.innerHTML = '<b style="color: red;">changed span</b>'
+  </script>
+</body>
+</html>
