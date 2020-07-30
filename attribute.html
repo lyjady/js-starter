@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Attribute</title>
+</head>
+<body>
+  <button>黑百合</button>
+  <button>黑影</button>
+  <a href="https://ow.blizzard.cn/heroes/widowmaker">
+    <img width="219px" height="327px" src="https://overwatch.nosdn.127.net/2/media/artwork/widowmaker-concept.1EwFH.jpg" alt="..." title="黑百合"/>
+  </a>
+  <script type="text/javascript">
+    const widowmakerHref = 'https://ow.blizzard.cn/heroes/widowmaker';
+    const widowmakerImageSrc = 'https://overwatch.nosdn.127.net/2/media/artwork/widowmaker-concept.1EwFH.jpg';
+    const sombraHref = 'https://ow.blizzard.cn/heroes/sombra';
+    const sombraImageSrc= 'https://overwatch.nosdn.127.net/2/media/artwork/sombra-concept.jpg';
+    const a = document.querySelector('a');
+    const img = document.querySelector('img');
+    // 指定使用document对象调用相应的HTML属性就能修改元素的属性
+    document.querySelectorAll('button')[0].onclick = () => {
+      a.href = widowmakerHref
+      img.src = widowmakerImageSrc;
+      img.title = '黑百合'
+    }
+    document.querySelectorAll('button')[1].onclick = () => {
+      a['href'] = sombraHref
+      img['src'] = sombraImageSrc;
+      img['title'] = '黑影'
+    }
+    const date = new Date()
+    console.log(date);
+    const currentHour = date.getHours();
+    if (currentHour < 12) {
+      alert('早')
+    } else if (currentHour < 18) {
+      alert('中')
+    } else {
+      alert('晚')
+    }
+  </script>
+</body>
+</html>
