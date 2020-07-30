@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Style</title>
+  <style>
+    .tb-close {
+      position: relative;
+      text-align: center;
+      width: 80px;
+    }
+    .tb-close span {
+      font-size: 12px;
+    }
+    .tb-close img:first-child {
+      display: block;
+      width: 80px;
+    }
+    .tb-close img:last-child {
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+    }
+    li {
+      list-style-type: none;
+    }
+
+    .box {
+      width: 250px;
+      height: 96px;
+      margin: 100px auto;
+    }
+
+    .box li {
+      float: left;
+      width: 24px;
+      height: 24px;
+      background: url(images/sprite.png) no-repeat;
+      margin: 15px;
+    }
+
+    .js-style {
+      font-size: 8px;
+      color: rebeccapurple;
+      text-decoration: underline;
+    }
+
+    .fail {
+      color: red;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .common {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <span>JavaScript修改元素样式</span>
+  <button>改变样式</button>
+  <button>class改变样式</button>
+  <br><hr>
+  <div class="tb-close">
+    <img src="images/tao.png" alt="...">
+    <span>扫一扫</span>
+    <img src="images/wrong.png" alt="...">
+  </div>
+  <br><hr>
+  <div class="box">
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <br><hr>
+  <input id="focus" type="text" value="手机">
+  <br><hr>
+  <input id="pwd" type="password">
+  <span id="valid" class="common">请输入密码</span>
+  <br><hr>
+  <button class="exclusion">btn</button>
+  <button class="exclusion">btn</button>
+  <button class="exclusion">btn</button>
+  <button class="exclusion">btn</button>
+  <button class="exclusion">btn</button>
+  <script type="text/javascript">
+    // JavaScript修改元素样式
+    // 1.element.style.xxx = xxx
+    const span = document.getElementsByTagName('span')[0]
+    const btn = document.getElementsByTagName('button')[0]
+    const classBtn = document.getElementsByTagName('button')[1]
+    btn.onclick = () => {
+      span.style.color = 'red'
+      span.style.fontSize = '20px'
+    }
+    const closeIcon = document.querySelector('.tb-close img:last-child')
+    const icon = document.querySelector('.tb-close')
+    closeIcon.onclick = () => {
+      icon.style.display = 'none'
+    }
+    const lis = document.querySelectorAll('.box ul li')
+    for (let i = 0; i < lis.length; i++) {
+      lis[i].style.backgroundPosition = `0 -${i * 44}px`
+    }
+    // element.className = 'xxx' 指定类名添加样式
+    classBtn.onclick = () => {
+      span.className = 'js-style'
+    }
+    // ---------------------------------
+    const focus = document.getElementById('focus');
+    focus.onfocus = () => {
+      if (focus.value === '手机') {
+        focus.value = ''
+      }
+    }
+
+    focus.onblur = () => {
+      if (focus.value === '') {
+        focus.value = '手机'
+      }
+    }
+
+    const pwd = document.getElementById('pwd');
+    const valid = document.getElementById('valid');
+    pwd.onblur = () => {
+      const length = pwd.value.length;
+      if (length < 6) {
+        valid.innerText = '密码太短'
+        valid.className = 'common fail'
+      } else {
+        valid.innerText = '密码正确'
+        valid.className = 'common success'
+      }
+    }
+
+    const exclusions = document.getElementsByClassName('exclusion');
+    for (let i = 0; i < exclusions.length; i++) {
+      exclusions[i].onclick = () => {
+        for (let j = 0; j < exclusions.length; j++) {
+          exclusions[j].style.backgroundColor = 'white'
+        }
+        exclusions[i].style.backgroundColor = 'red'
+      }
+    }
+  </script>
+</body>
+</html>

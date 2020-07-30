@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>From</title>
+  <style>
+    .pwd-label {
+      position: relative;
+      display: block;
+      width: 400px;
+      height: 25px;
+    }
+
+    #password {
+      outline: none;
+      display: block;
+      width: 370px;
+      height: 25px;
+      padding: 0;
+      border: 0;
+      border-bottom: 1px solid #CCCCCC;
+    }
+
+    .pwd-label img {
+      position: absolute;
+      top: 0;
+      right: 30px;
+      width: 24px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <label>
+    <input type="text">
+  </label>
+  <button id="textBtn">按钮</button>
+  <br/><hr/>
+  <label class="pwd-label">
+    <input id="password" type="password">
+    <img src="images/close.png" alt=".....">
+  </label>
+  <script type="text/javascript">
+    // 修改表单元素的属性与修改元素的属性一样
+    const textBtn = document.getElementById('textBtn')
+    const textValue = document.querySelector(`input[type='text']`)
+    textBtn.onclick = () => {
+      textValue.value = '点击了按钮'
+      textValue.disabled = true
+    }
+
+    const changeTypeImg = document.querySelector('.pwd-label img')
+    const password = document.querySelector('input[type=password]')
+    let flag = 1;
+    changeTypeImg.onclick = () => {
+      if (flag) {
+        changeTypeImg.src = 'images/open.png'
+        password.type = 'text'
+        flag = 0
+      } else {
+        changeTypeImg.src = 'images/close.png'
+        password.type = 'password'
+        flag = 1
+      }
+    }
+  </script>
+</body>
+</html>
