@@ -88,7 +88,7 @@
     console.log(span.getAttribute('id'));
     console.log(span.getAttribute('data-index'));
 
-    // element.attribute = 'xxx' 改变自定义属性
+    // element.attribute = 'xxx' 改变原生属性
     // element.setAttribute(attributeName, 'xxx') 改变自定义属性
     span.id = 'spans';
     span.setAttribute('data-index', '22')
@@ -96,6 +96,23 @@
     // removeAttribute('attributeName')移除属性
     span.removeAttribute('id')
     span.removeAttribute('data-index')
+
+    const lis = document.querySelector('ul').children;
+    const items = document.getElementsByClassName('item');
+    for (let i = 0; i < lis.length; i++) {
+      lis[i].setAttribute('data-index', i);
+      lis[i].onclick = () => {
+        for (let j = 0; j < lis.length; j++) {
+          lis[j].removeAttribute('class')
+          items[j].style.display = 'none';
+        }
+        lis[i].className = 'current';
+        items[i].style.display = 'block';
+      }
+    }
+    // html为了区分原生的属性与自定义属性, 规定自定义属性需要以(data-属性名)的方式来命名, 属性名如果是多个单词组成的那么单词与单词之间用'-'间隔
+    // element.dataset.属性名取得当前元素的全部自定义属性, 如果属性名有多个单词那么调用方法时需要按照驼峰命名
+    console.log(lis.dataset);
   </script>
 </body>
 </html>
