@@ -72,6 +72,23 @@
     .nav ul li a:hover {
       background-color: #FFF5DA;
     }
+
+    table {
+      width: 500px;
+      margin: 100px auto;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    td,
+    th {
+      border: 1px solid #333;
+    }
+
+    thead tr {
+      height: 40px;
+      background-color: #ccc;
+    }
   </style>
 </head>
 <body>
@@ -148,6 +165,37 @@
   <ul class="append">
 
   </ul>
+  <br>
+  <hr>
+  <div id="del">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+  </div>
+  <br>
+  <hr>
+  <button id="del-btn">del</button>
+  <ul id="del-ul">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+  <br>
+  <hr>
+  <table cellspacing="0">
+    <thead>
+    <tr>
+      <th>姓名</th>
+      <th>科目</th>
+      <th>成绩</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
   <script type="text/javascript">
     // 在html中所有的元素都可以称之为节点, 节点分为节点主要由三个部分组成节点名称, 节点类型, 节点内容
     // 节点类型分为元素类型, 属性类型, 文本类型. 他们对应分别对应1, 2, 3
@@ -201,6 +249,64 @@
       // uls.append(element)
       // 追加到指定元素(uls)的指定子元素(uls.children[0])的前面
       uls.insertBefore(element, uls.children[0])
+    }
+    // element.removeChild(node) 删除节点
+    const del = document.getElementById('del');
+    console.log(del.children);
+    del.removeChild(del.children[0])
+
+    const delBtn = document.getElementById('del-btn');
+    const delUl = document.getElementById('del-ul');
+    delBtn.onclick = () => {
+      if (delUl.children.length > 0) {
+        delUl.removeChild(delUl.children[0])
+        if (delUl.children.length === 0) {
+          delBtn.disabled = 'disabled'
+        }
+      }
+    }
+    // 复制节点 cloneNode(deep), deep: false 只拷贝标签, true: 拷贝标签与内容, 默认是false
+    const clone = delUl.lastElementChild.cloneNode(true);
+    delUl.insertBefore(clone, delUl.children[1])
+    const datas = [{
+      name: '魏璎珞',
+      subject: 'JavaScript',
+      score: 100
+    }, {
+      name: '弘历',
+      subject: 'JavaScript',
+      score: 98
+    }, {
+      name: '傅恒',
+      subject: 'JavaScript',
+      score: 99
+    }, {
+      name: '明玉',
+      subject: 'JavaScript',
+      score: 88
+    }, {
+      name: '大猪蹄子',
+      subject: 'JavaScript',
+      score: 0
+    }];
+    const tbody = document.querySelector('tbody');
+    for (let i = 0; i < datas.length; i++) {
+      const tr = document.createElement('tr');
+      for (attr in datas[i]) {
+        const td = document.createElement('td');
+        td.innerText = datas[i][attr]
+        tr.appendChild(td)
+      }
+      const td = document.createElement('td');
+      td.innerHTML = '<a class="del-tab" href="javascript:;">删除</a>'
+      tr.appendChild(td)
+      tbody.appendChild(tr)
+    }
+    const delTabs = document.querySelectorAll('.del-tab');
+    for (let i = 0; i < delTabs.length; i++) {
+      delTabs[i].addEventListener('click', () => {
+        tbody.removeChild(delTabs[i].parentNode.parentNode)
+      })
     }
   </script>
 </body>

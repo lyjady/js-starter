@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>事件</title>
+</head>
+<body>
+  <button id="listener">listener</button>
+  <script type="text/javascript">
+    // 使用onclick为一个元素多次绑定事件, 后面的事件将会覆盖前面的事件
+    // 使用addEventListener(event, function {})为元素添加时间监听器为元素的一个事件类型绑定多个事件
+    const listener = document.querySelector('#listener');
+    listener.addEventListener('click', () => {
+      alert('12345')
+    })
+    listener.addEventListener('click', () => {
+      alert('67890')
+    })
+  </script>
+</body>
+</html>
