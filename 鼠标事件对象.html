@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>mouse event object</title>
+  <style>
+    img {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <img src="images/angel.gif" alt="...">
+  <script type="text/javascript">
+    document.addEventListener('mousemove', e => {
+      // e.clientX 鼠标距离可视窗口的x轴长度
+      // e.clientY 鼠标距离可视窗口的y轴长度
+      const img = document.querySelector('img');
+      const x = e.pageX // pageX鼠标距离整个页面的x轴长度
+      const y = e.pageY // pageY鼠标距离整个页面的y轴长度
+      img.style.top = `${y - 40}px`
+      img.style.left = `${x - 34}px`
+    })
+  </script>
+</body>
+</html>

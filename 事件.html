@@ -3,9 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>事件</title>
+  <style>
+    .father, .father2 {
+      width: 200px;
+      height: 200px;
+      background-color: #0099cc;
+    }
+    .son, .son2 {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
 </head>
 <body>
   <button id="listener">listener</button>
+  <div class="father">
+    <div class="son"></div>
+  </div>
+  <ul style="width: 50px; height: 100px; background-color: #0099cc">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+  <a href="https://www.baidu.com" id="default">默认行为</a>
+  <div class="father2">
+    <div class="son2"></div>
+  </div>
+  <ul id="wt">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
   <script type="text/javascript">
     // 使用onclick为一个元素多次绑定事件, 后面的事件将会覆盖前面的事件
     // 使用addEventListener(event, function {})为元素添加时间监听器为元素的一个事件类型绑定多个事件
@@ -15,6 +45,59 @@
     })
     listener.addEventListener('click', () => {
       alert('67890')
+    })
+    // element.onclick = null 用于解绑事先绑定的事件
+    // element.removeEventListener('eventType', fn) 用于解绑事先绑定的事件
+    // 事件执行流程: document -> html -> body -> 目标元素 这个阶段称之为捕获, 目标元素 -> body -> html -> document 这个过程称之为冒泡
+    // addEventListener('eventType', fn, boolean) 第三个参数如果是true则说明是捕获, false或者默认则是冒泡
+    const father = document.querySelector('.father');
+    const son = document.querySelector('.son');
+    // 声明捕获事件, 那么执行顺序就是father -> son
+    // father.addEventListener('click', () => {
+    //   alert('father')
+    // }, true)
+    // son.addEventListener('click', () => {
+    //   alert('son')
+    // }, true)
+    // 声明冒泡事件, 那么执行顺序就是son -> father
+    father.addEventListener('click', () => {
+      alert('father')
+    }, false)
+    son.addEventListener('click', () => {
+      alert('son')
+    }, false)
+    // 事件对象, addEventListener(event, function(event) {}) 定义事件回调函数的时候js都会传递一个事件对象, 不同的事件事件对象的属性也不同
+    const ul = document.querySelector('ul')
+    ul.addEventListener('click', e => {
+      // 事件触发对象, 点击对象
+      console.log(e.target)
+      // 事件绑定对象就是this
+      console.log(ul)
+    })
+    // 阻止默认行为
+    const defBtn = document.querySelector('#default');
+    defBtn.addEventListener('click', e => {
+      alert('default button')
+      // return false 在传统的事件绑定上可以阻止默认行为
+      // addEventListener需要使用e.preventDefault()来阻止
+      e.preventDefault();
+    })
+    // 阻止冒泡
+    const father2 = document.querySelector('.father2');
+    const son2 = document.querySelector('.son2');
+    father2.addEventListener('click', () => {
+      alert('father')
+    })
+    son2.addEventListener('click', e => {
+      alert('son')
+      // 阻止冒泡事件
+      e.stopPropagation()
+    })
+    // 事件委托, 如果要为一组元素绑定事件那么通常做法就是使用for循环绑定, 但是这样的做法效率很低可是使用事件的委托.为需要绑定事件的一组元素设定一个父元素
+    // 为父元素绑定事件, 当点击元素的时候事件会冒泡到父元素上执行相应的逻辑, 可以使用e.target取得触发事件的元素对象
+    const wt = document.querySelector('#wt');
+    wt.addEventListener('click', e => {
+      e.target.style.backgroundColor = 'red'
     })
   </script>
 </body>
