@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Load</title>
+  <script type="text/javascript">
+    // BOM的load事件会在加载完整个DOM之后执行包括CSS, Flash, Image
+    window.addEventListener('load', () => {
+      alert('load')
+    })
+    // BOM的DOMContentLoaded事件类似于load事件, 但是会在加载完DOM基本标签之后加载CSS, Image之前执行, 所以DOMContentLoaded会先于Load执行
+    // 如果页面中有大量图片的话可以使用这个事件
+    window.addEventListener('DOMContentLoaded', () => {
+      alert('DOMContentLoaded')
+    })
+  </script>
+</head>
+<body>
+
+</body>
+</html>

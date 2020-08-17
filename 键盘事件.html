@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>键盘事件</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .search {
+      position: relative;
+      width: 178px;
+      margin-top: 50px;
+    }
+
+    .con {
+      display: none;
+      position: absolute;
+      top: -40px;
+      width: 171px;
+      border: 1px solid rgba(0, 0, 0, .2);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+      padding: 5px 0;
+      font-size: 18px;
+      line-height: 20px;
+      color: #333;
+    }
+
+    .con::before {
+      content: '';
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 28px;
+      left: 18px;
+      border: 8px solid #000;
+      border-style: solid dashed dashed;
+      border-color: #fff transparent transparent;
+    }
+  </style>
+</head>
+<body>
+  <input id="inputFocus">
+  <br><hr>
+  <div class="search">
+    <div class="con">123</div>
+    <input type="text" placeholder="请输入您的快递单号" class="jd">
+  </div>
+  <script type="text/javascript">
+    // 放开键盘时触发, 不区分大小写, 默认返回放开字母的大写的ACSII码值
+    document.addEventListener('keyup', e => {
+      console.log(`keyup => ${e.keyCode} => ${e.key} => ${e.code}`)
+    })
+    // 按下键盘时触发, 可以识别功能键, 不区分大小写, 默认返回放开字母的大写的ACSII码值
+    document.addEventListener('keydown', e => {
+      console.log(`keydown => ${e.keyCode} => ${e.key} => ${e.code}`)
+    })
+    // 按下键盘时触发, 不识别功能键, 区分大小写
+    document.addEventListener('keypress', e => {
+      console.log(`keypress => ${e.keyCode} => ${e.key} => ${e.code}`)
+    })
+    // 三者触发顺序 down -> press -> up
+    // 如果鼠标焦点在输入框内, keydown, keypress会在文字落入输入框之前执行监听代码, keyup会在文字落入输入框之前执行监听代码
+    const inputFocus = document.querySelector('#inputFocus');
+    document.addEventListener('keyup', e => {
+      if (e.key === 's') {
+        inputFocus.focus()
+      }
+    })
+    const jd = document.querySelector('.jd');
+    const con = document.querySelector('.con');
+    document.addEventListener('keyup', e => {
+      if (jd.value === '') {
+        con.style.display = 'none'
+      } else {
+        con.innerText = jd.value
+        con.style.display = 'block'
+      }
+    })
+    jd.addEventListener('focus', () => {
+      if (jd.value !== '') {
+        con.style.display = 'block'
+      }
+    })
+    jd.addEventListener('blur', () => {
+      con.style.display = 'none'
+    })
+  </script>
+</body>
+</html>

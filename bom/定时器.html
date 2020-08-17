@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>定时器</title>
+  <script type="text/javascript">
+    window.addEventListener('load', () => {
+      // 延迟执行 setTimeout(回调函数, 延迟时间), 返回一个定时器的id
+      window.setTimeout(() => console.log('setTimeout'), 3000)
+      const img = document.querySelector('img')
+      const stopAdBtn = document.querySelector('#stopAd')
+      let timer = window.setTimeout(() => img.style.display = 'none', 2000)
+      // 清除定时器clearTimeout(要清除定时器的id)
+      stopAdBtn.addEventListener('click', () => window.clearTimeout(timer))
+    })
+  </script>
+</head>
+<body>
+  <img src="../images/tao.png" alt="...">
+  <button id="stopAd">停止</button>
+</body>
+</html>
