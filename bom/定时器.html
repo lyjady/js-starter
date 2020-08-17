@@ -12,11 +12,23 @@
       let timer = window.setTimeout(() => img.style.display = 'none', 2000)
       // 清除定时器clearTimeout(要清除定时器的id)
       stopAdBtn.addEventListener('click', () => window.clearTimeout(timer))
+      const dateSpan = document.querySelector('#date')
+      window.setInterval(() => {
+        let now = new Date();
+        const year = now.getFullYear()
+        const month = now.getMonth().toString().padStart(2, '0')
+        const day = now.getDate().toString().padStart(2, '0')
+        const hour = now.getHours().toString().padStart(2, '0')
+        const minute = now.getMinutes().toString().padStart(2, '0')
+        const second = now.getSeconds().toString().padStart(2, '0')
+        dateSpan.innerText = `${year}-${month}-${day} ${hour}:${minute}:${second}`
+      }, 1000)
     })
   </script>
 </head>
 <body>
   <img src="../images/tao.png" alt="...">
   <button id="stopAd">停止</button>
+  <span id="date"></span>
 </body>
 </html>
