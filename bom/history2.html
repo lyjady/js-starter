@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>History2</title>
+  <script>
+    addEventListener('load', () => {
+      let btn = document.querySelector('#btn');
+      btn.addEventListener('click', () => {
+        // 后退
+        history.back();
+      })
+    })
+  </script>
+</head>
+<body>
+  <a href="history1.html">history1</a>
+  <button id="btn">后退</button>
+</body>
+</html>

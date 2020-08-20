@@ -18,6 +18,9 @@
       console.log(location.port);
       console.log(location);
       const jumpBtn = document.querySelector('#jump')
+      const assign = document.querySelector('#assign')
+      const replace = document.querySelector('#replace')
+      const reload = document.querySelector('#reload')
       let num = 5
       jumpBtn.addEventListener('click', () => {
         setInterval(() => {
@@ -30,10 +33,26 @@
           }
         }, 1000)
       })
+      assign.addEventListener('click', () => {
+        // assign跳转, 类似于location.href会留下历史记录
+        location.assign('https://www.baidu.com')
+      })
+      replace.addEventListener('click', () => {
+        // replace跳转, 类似于location.assign()但是不会留下历史记录
+        location.replace('https://www.baidu.com')
+      })
+      reload.addEventListener('click', () => {
+        // 刷新页面, 参数传true则等价于Ctrl+F5
+        location.reload()
+      })
     })
   </script>
 </head>
 <body>
   <button id="jump">开始跳转</button>
+  <button id="assign">assign跳转</button>
+  <button id="replace">replace跳转</button>
+  <button id="reload">reload刷新</button>
+
 </body>
 </html>

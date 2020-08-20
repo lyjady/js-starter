@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>History1</title>
+  <script>
+    addEventListener('click', () => {
+      let btn = document.querySelector('#btn');
+      btn.addEventListener('click', () => {
+        // 前进
+        // history.forward();
+        // history.go(number) 让浏览器前进后退指定number的步数, 正数就是前进, 负数就是后退
+        history.go(-5)
+      })
+    })
+  </script>
+</head>
+<body>
+  <a href="history2.html">history2</a>
+  <button id="btn">前进</button>
+</body>
+</html>
