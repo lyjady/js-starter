@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Location</title>
+  <script>
+    window.addEventListener('load', () => {
+      // Location 对象是 Window 对象的一个部分, 包含有关当前 URL 的信息。
+      // 获取地址栏的URL
+      console.log(location.href);
+      // 获取地址栏的搜索参数
+      console.log(location.search);
+      // 获取主机ip+port
+      console.log(location.host);
+      // ip
+      console.log(location.hostname);
+      // 端口
+      console.log(location.port);
+      console.log(location);
+      const jumpBtn = document.querySelector('#jump')
+      let num = 5
+      jumpBtn.addEventListener('click', () => {
+        setInterval(() => {
+          if (num === 1) {
+            // 为location.href赋值会给浏览器跳转到赋值的URL
+            window.location.href = 'https://www.baidu.com'
+          } else {
+            num--;
+            jumpBtn.innerText = `${num}s之后跳转`
+          }
+        }, 1000)
+      })
+    })
+  </script>
+</head>
+<body>
+  <button id="jump">开始跳转</button>
+</body>
+</html>

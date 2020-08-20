@@ -3,6 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>定时器</title>
+  <style>
+    .countdown {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin-right: 5px;
+      background-color: #333333;
+      color: white;
+      text-align: center;
+      line-height: 30px;
+      font-weight: 700;
+    }
+  </style>
   <script type="text/javascript">
     window.addEventListener('load', () => {
       // 延迟执行 setTimeout(回调函数, 延迟时间), 返回一个定时器的id
@@ -13,7 +26,15 @@
       // 清除定时器clearTimeout(要清除定时器的id)
       stopAdBtn.addEventListener('click', () => window.clearTimeout(timer))
       const dateSpan = document.querySelector('#date')
-      window.setInterval(() => {
+      const hSpan = document.getElementById('hour');
+      const mSpan = document.getElementById('minute');
+      const sSpan = document.getElementById('second');
+      calNowTime()
+      window.setInterval(calNowTime, 1000)
+      const time = new Date('2020-08-20 12:00:00')
+      remainingTime()
+      window.setInterval(remainingTime, 1000)
+      function calNowTime() {
         let now = new Date();
         const year = now.getFullYear()
         const month = now.getMonth().toString().padStart(2, '0')
@@ -22,13 +43,60 @@
         const minute = now.getMinutes().toString().padStart(2, '0')
         const second = now.getSeconds().toString().padStart(2, '0')
         dateSpan.innerText = `${year}-${month}-${day} ${hour}:${minute}:${second}`
-      }, 1000)
+      }
+      function remainingTime() {
+        const nowTime = new Date();
+        const timeDiff = time - nowTime;
+        const hour = (Math.floor(timeDiff / 1000 / 60 / 60).toString()).padStart(2, '0');
+        const minute = (Math.floor((timeDiff / 1000 / 60) % 60).toString()).padStart(2, '0')
+        let second = (Math.ceil((timeDiff / 1000) % 60).toString()).padStart(2, '0')
+        if (second === '60') {
+          second = '00'
+        }
+        hSpan.innerText = hour;
+        mSpan.innerText = minute;
+        sSpan.innerText = second;
+      }
+      remainingTime()
+      const sms = document.getElementById('sms');
+      let num = 5
+      sms.addEventListener('click', e => {
+        const interval = window.setInterval(() => {
+          sms.disabled = true
+          if (num === 1) {
+            sms.disabled = false
+            sms.innerText = '发送'
+            num = 5;
+            window.clearInterval(interval)
+          } else {
+            num--;
+            sms.innerText = `${num}s`
+          }
+        }, 1000);
+      })
+      // JavaScript中this指向方法的调用者!!!!!!!!!!!!!
+      /**
+       * js执行机制: js分为同步与异步的执行方式(事件回调函数, 定时器, 资源加载的回调函数), 首先js的主线程执行栈回去解析任务如果是同步任务那么会直接执行
+       * 如果是异步任务, 不会立刻放到异步队列中等待处理, 而是将任务放到异步进程处理中. 一旦异步任务的触发时机到了就将异步任务入异步队列.
+       * 事件回调函数的触发时机就是事件发发生, 定时器就是制定的延迟时间到了. 一旦异步任务的触发时机达到就会将任务放置到队列中去
+       * 此时js会将执行完主线程栈中的方法之后将异步队列中的任务依次出队放入到主线程方法栈中执行(js中的异步执行与java的多线程异步执行不太相同)
+       * 为了能够保证程序中的异步任务能够全部执行, 主线程栈会维持一个事件循环, 不断的去异步任务队列中查看是否存在异步任务, 若有则等到主线程栈中的同步任务完成之后入栈执行
+       */
     })
   </script>
 </head>
 <body>
-  <img src="../images/tao.png" alt="...">
+  <div style="height: 160px">
+    <img src="../images/tao.png" alt="...">
+  </div>
   <button id="stopAd">停止</button>
+  <br><hr>
   <span id="date"></span>
+  <br><hr>
+  <span class="countdown" id="hour">0</span>
+  <span class="countdown" id="minute">0</span>
+  <span class="countdown" id="second">0</span>
+  <br><hr>
+  <button id="sms">发送</button>
 </body>
 </html>
