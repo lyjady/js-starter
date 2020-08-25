@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Offset</title>
+  <style>
+    .father {
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+      background-color: #404060;
+      margin: 100px;
+    }
+  </style>
+  <script>
+    window.addEventListener('load', () => {
+      let father = document.querySelector('.father');
+      // offset计算元素的偏移信息, 其中offsetWidth与offsetHeight包含元素的border和padding
+      // offsetTop与offsetLeft获得元素与最近开启定位的父元素的偏移量, 若没有定位的父元素则以body定位
+      // offset与style的区别, style只能获取行内样式无法获取样式表样式, 如果宽高定义在样式表中那么style无法获取, offset可以获取
+      // offset是只读的无法改变, style是可读可写的
+      console.log(father.offsetWidth);
+      console.log(father.offsetHeight);
+      console.log(father.offsetTop);
+      console.log(father.offsetLeft)
+    })
+  </script>
+</head>
+<body>
+  <div class="father"></div>
+</body>
+</html>
