@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Client</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      padding: 5px;
+      border: 2px solid red;
+      background-color: #1ba1e6;
+    }
+  </style>
+  <script>
+    addEventListener('load', e => {
+      const div = document.querySelector('div');
+      // 不同于offsetWidth和offsetHeight, clientWidth和clientHeight不包含border
+      console.log(div.clientHeight);
+      console.log(div.clientWidth);
+      // 获取上左边框的大小
+      console.log(div.clientLeft);
+      console.log(div.clientTop);
+    })
+  </script>
+</head>
+<body>
+  <div></div>
+</body>
+</html>

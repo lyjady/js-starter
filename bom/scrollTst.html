@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ScrollTest</title>
+  <style>
+    .header {
+      height: 150px;
+      background-color: #5c5251;
+    }
+
+    .banner {
+      height: 100px;
+      background-color: #333333;
+    }
+
+    .main {
+      height: 1750px;
+      background-color: #1ba1e6;
+    }
+
+    div {
+      width: 80%;
+      margin: 10px auto;
+    }
+
+    .slider-bar {
+      position: absolute;
+      top: 300px;
+      right: 120px;
+      width: 45px;
+      height: 125px;
+      background-color: #b1191a;
+    }
+  </style>
+  <script>
+    addEventListener('load', () => {
+      const header = document.querySelector('.header');
+      const sliderBar = document.querySelector('.slider-bar');
+      const main = document.querySelector('.main');
+      const back = document.querySelector('.back');
+      document.addEventListener('scroll', () => {
+        // 获取整个页面滚动的长度, 如果是获取元素的那就使用element.scrollTop
+        const pageYOffset = window.pageYOffset;
+        if (pageYOffset >= header.offsetHeight && sliderBar.style.position !== 'fixed') {
+          sliderBar.style.position = 'fixed';
+          sliderBar.style.top = `${sliderBar.offsetTop - header.offsetHeight}px`
+        }
+        if (pageYOffset <= header.offsetHeight && sliderBar.style.position === 'fixed') {
+          sliderBar.style.position = 'absolute'
+          sliderBar.style.top = '300px'
+        }
+        if (pageYOffset >= main.offsetTop) {
+          back.style.display = 'block';
+        } else {
+          back.style.display = 'none'
+        }
+      })
+    })
+  </script>
+</head>
+<body>
+  <div class="slider-bar">
+    <span class="back" style="display: none">返回顶部</span>
+  </div>
+  <div class="header">header</div>
+  <div class="banner">banner</div>
+  <div class="main">main</div>
+</body>
+</html>
