@@ -20,22 +20,17 @@
       background-color: #40b83f;
     }
   </style>
+  <script src="../js/animation.js"></script>
   <script>
     addEventListener('load', () => {
-      function animation(element, target) {
-        const timer = setInterval(() => {
-          element.style.left = `${element.offsetLeft + 1}px`
-          if (element.offsetLeft >= target) {
-            clearInterval(timer)
-          }
-        })
-      }
       const div = document.querySelector('div');
       const span = document.querySelector('span');
       const startBtn = document.querySelector('#start');
       startBtn.addEventListener('click', () => {
-        animation(div, 800)
-        animation(span, 700)
+        animation(div, 800, 15, () => {
+          div.style.backgroundColor = 'red'
+        })
+        animation(span, 200, 15)
       })
     })
   </script>
