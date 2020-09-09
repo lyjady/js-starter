@@ -32,6 +32,10 @@
       height: 125px;
       background-color: #b1191a;
     }
+
+    .back {
+      cursor: pointer;
+    }
   </style>
   <script>
     addEventListener('load', () => {
@@ -56,6 +60,22 @@
           back.style.display = 'none'
         }
       })
+      back.addEventListener('click', () => {
+        animation(window, 0)
+      })
+
+      function animation(element, target, callback) {
+        clearInterval(element.timer)
+        element.timer = setInterval(() => {
+          let step = (target - element.pageYOffset) / 10
+          step = step > 0 ? Math.ceil(step) : Math.round(step)
+          window.scroll(0, element.pageYOffset + step)
+          if (element.pageYOffset === target) {
+            callback && callback()
+            clearInterval(element.timer)
+          }
+        }, 15)
+      }
     })
   </script>
 </head>
