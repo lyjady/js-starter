@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Storage</title>
+  <script type="text/javascript">
+    // localStorage和sessionStorage可以将数据存储在浏览器中
+    // 二者的区别在于生命周期的不同, localStorage如果不手动删除那么将永久存储在浏览器中, 并且可以在多个浏览器窗口中共享
+    // sessionStorage的生命周期只是在一次窗口回话中, 浏览器窗口之间不能共享
+    // 具体的api(以localStorage为例):
+    localStorage.setItem('key', 'value')
+    localStorage.getItem('key')
+    localStorage.removeItem('key')
+    localStorage.clear()
+  </script>
+</head>
+<body>
+
+</body>
+</html>
