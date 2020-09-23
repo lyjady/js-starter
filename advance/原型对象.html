@@ -21,6 +21,42 @@
     console.log(sam);
     console.log(sam.field);
     console.log(sam.speak() === jane.speak())
+    // 原型对象内有一个constructor属性, 他表示了原型对象多表示构造方法
+    console.log(People.prototype.constructor)
+    // 对象之所以能调用原型对象的方法是因为对象内有个__proto__属性指向了原型对象(__proto__为了和prototype区分, 称之为对象的原型)
+    console.log(sam.__proto__ === People.prototype)
+    /*
+      可使用下面的方法为原型对象挂载多个方法, 但是这样的做法会导致原型对象内的constructor被覆盖需要重新指定
+      People.prototype = {
+        method1() {}
+        method2() {}
+      }
+    */
+    // 原型对象也是对象, 既然是对象那么也有__proto__属性, 这个属性指向了Object.prototype
+    // Object的原型对象的__proto__属性没有指向, 为null
+    // 普通的原型对象 -> Object.prototype -> null 这构成了原型链
+    console.log(People.prototype)
+    console.log(People.prototype.__proto__ === Object.prototype)
+    console.log(sam.__proto__.__proto__ === Object.prototype)
+    console.log(Object.prototype.__proto__)
+    // 对象调用方法或者属性的时候会先查看自己的原型内有没该方法, 有就调用, 没有就顺着原型链向上查找。找到就调用, 没有则为定义。
+    // 在ES6之前没有直接定义对象之间继承关系, 通常在子类的构造对象中调用call()方法, 将子类的实例与父类构造函数的参数传入父类的构造函数来进行构造
+    // call()第一个参数可以改变被调用方法中的this指向
+    function Father(name, age) {
+      this.name = name
+      this.age = age
+    }
+    function Son(name, age, score) {
+      Father.call(this, name, age)
+      this.score = score
+    }
+    const son = new Son('son', 8, 99)
+    Father.prototype.money = () => console.log('take money')
+    Son.prototype = new Father()
+    Son.prototype.constructor = Son
+    console.log(Son.prototype)
+    console.log(son)
+    console.log(son.money())
   </script>
 </head>
 <body>
