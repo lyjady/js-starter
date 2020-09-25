@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    table {
+      width: 400px;
+      border: 1px solid #000;
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+
+    td,
+    th {
+      border: 1px solid #000;
+      text-align: center;
+    }
+
+    input {
+      width: 50px;
+    }
+
+    .search {
+      width: 600px;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+  <body>
+  <div class="search">
+    按照价格查询: <input type="text" class="start"> - <input type="text" class="end">
+    <button class="search-price">搜索</button>
+    按照商品名称查询: <input type="text" class="product">
+    <button class="search-pro">查询</button>
+  </div>
+  <table>
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>产品名称</th>
+      <th>价格</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <script>
+    const tbody = document.querySelector('tbody')
+    const startPrice = document.querySelector('.start')
+    const endPrice = document.querySelector('.end')
+    const search = document.querySelector('.search-price')
+    const product = document.querySelector('.product')
+    const searchPro = document.querySelector('.search-pro')
+    // 利用新增数组方法操作数据
+    const data = [{
+      id: 1,
+      name: '小米',
+      price: 3999
+    }, {
+      id: 2,
+      name: 'Apple',
+      price: 4999
+    }, {
+      id: 3,
+      name: 'Samsung',
+      price: 2299
+    }, {
+      id: 4,
+      name: '锤子',
+      price: 1999
+    },];
+    generateData(data)
+    search.addEventListener('click', () => {
+      const min = startPrice.value
+      const max = endPrice.value
+      const result = data.filter(item => {
+        if (min && max) {
+          return item.price >= min && item.price <= max
+        } else if (max) {
+          return item.price <= max
+        } else if (min) {
+          return item.price >= min
+        }
+      })
+      generateData(result)
+    })
+    searchPro.addEventListener('click', () => {
+      const productName = product.value
+      const result = []
+      data.some(item => {
+        if (item.name === productName) {
+          result.push(item)
+          return true
+        }
+      })
+      generateData(result)
+    })
+    function generateData(data) {
+      tbody.innerHTML = ''
+      data.forEach(item => {
+        const tr = document.createElement('tr')
+        tr.innerHTML = '<td>' + item.id + '</td>' +
+          '<td>' + item.name + '</td>' +
+          '<td>' + item.price + '</td>'
+        tbody.appendChild(tr)
+      })
+    }
+  </script>
+</body>
+
+</html>
