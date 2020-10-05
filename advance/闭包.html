@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>闭包</title>
+</head>
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+  </ul>
+  <script>
+    // 如果一个作用域A能用到另一个作用域B内定义的变量那么，那么作用域B称之为闭包
+    function B() {
+      let num = 10;
+      function A() {
+        console.log(num)
+      }
+      A()
+    }
+    B()
+    const lis = document.querySelectorAll('li')
+    for (let i = 0; i < lis.length; i++) {
+      (function (i) {
+        lis[i].addEventListener('click', () => console.log(i))
+      })(i)
+    }
+  </script>
+</body>
+</html>

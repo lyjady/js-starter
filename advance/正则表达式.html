@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>正则表达式</title>
+  <script>
+    // 创建正则表法式
+    let reg = /123/
+    // 验证执行字符串是否满足正则表达式
+    console.log(reg.test('123'))
+    // 如果包含指定字符就会返回true
+    console.log(reg.test('456123546'))
+    // ^表示以指定的字符开头
+    reg = /^abc/
+    console.log(reg.test('abcd')) //true
+    console.log(reg.test('aabcd')) //false
+    // $表示以指定的字符结尾,
+    reg = /abc$/
+    console.log(reg.test('ikisabc')) //true
+    console.log(reg.test('ikisabcwd')) //flase
+    // ^和$一起使用的话就表示匹配的字符必须要是^ $之间的字符, 表示精确匹配
+    reg = /^abc$/
+    console.log(reg.test('abc')) //true
+    console.log(reg.test('abcabc')) //false
+    // []表示一系列字符可供选择只要匹配一个就行了, -表示一个范围, 如果追加字符直接追加在后面即可
+    // 只要包含小写字符大写字符数字其中一个即可
+    reg = /[a-zA-Z0-9]/
+    console.log(reg.test('a')) // true
+    console.log(reg.test('A')) // true
+    console.log(reg.test('9')) // true
+    console.log(reg.test('-')) // false
+    // 匹配的字符只能是abc其中一个, 经过[]筛选之后只有一个字符, 又被^$包裹
+    reg = /^[abc]$/
+    console.log(reg.test('a')) // true
+    console.log(reg.test('b')) // true
+    console.log(reg.test('c')) // true
+    console.log(reg.test('e')) // false
+    // [^...]中括号内的^代表取反
+    // 表示取反, 匹配大写字符
+    reg = /[^a-z]/
+    console.log(reg.test('A')) // true
+    console.log(reg.test('a')) // false
+    console.log('----------量词-----------')
+    // 量词
+    // *: 重复0次或者多次
+    reg = /^a*$/
+    console.log(reg.test('a')) //true
+    console.log(reg.test('')) //true
+    console.log(reg.test('aaaaa')) //true
+    // +: 重复一次或者多次
+    reg = /^a+$/
+    console.log(reg.test('a')) //true
+    console.log(reg.test('')) //false
+    console.log(reg.test('aaaaa')) //true
+    // ?: 出现一次或者没有出现
+    reg = /^a?$/
+    console.log(reg.test('a')) //true
+    console.log(reg.test('')) //true
+    // {3}: 重复三次
+    reg = /^[a-z]{3}$/
+    console.log(reg.test('avc')) //true
+    console.log(reg.test('avcs')) //false
+    // {3,}: 至少重复三次
+    reg = /^[a-z]{3,}$/
+    console.log(reg.test('an')) // false
+    console.log(reg.test('avc')) // true
+    console.log(reg.test('avcs')) // true
+    // {3,6}: 重复不小于三次不大于六次
+    reg = /^[a-z]{3,6}$/
+    console.log(reg.test('ab')) //false
+    console.log(reg.test('abasd')) //true
+    console.log(reg.test('abasdasdasd')) //false
+  </script>
+</head>
+<body>
+
+</body>
+</html>

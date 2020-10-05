@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>递归</title>
+  <script>
+    // 计算阶乘
+    function factorial(num) {
+      if (num === 1) {
+        return 1
+      }
+      return num * factorial(num - 1)
+    }
+    console.log(factorial(5))
+    // 获得斐波那契数列里面指定的值
+    // 1, 1, 2, 3, 5, 8, 13, 21, 34
+    function fibonacci(index) {
+      if (index === 1 || index === 2) {
+        return 1
+      }
+      return fibonacci(index - 1) + fibonacci(index - 2);
+    }
+    console.log(fibonacci(9))
+    // 递归查询数据
+    const data = [
+      {
+        id: 1,
+        name: 'Jack'
+      },
+      {
+        id: 2,
+        name: 'Amy'
+      },
+      {
+        id: 3,
+        name: 'Sam',
+        children: [
+          {
+            id: 4,
+            name: 'Jane',
+            children: [
+              {
+                id: 6,
+                name: 'Aly'
+              }
+            ]
+          },
+          {
+            id: 5,
+            name: 'Mike'
+          }
+        ]
+      }
+    ]
+    let result = {}
+    function findPeople(data, id) {
+      data.some(item => {
+        if (item.id === id) {
+          result = item
+          return true;
+        } else if (item.children && item.children.length > 0) {
+          return findPeople(item.children, id)
+        }
+      })
+    }
+    findPeople(data, 6)
+    console.log(result)
+  </script>
+</head>
+<body>
+
+</body>
+</html>

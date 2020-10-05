@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>改变this指向</title>
+  <script>
+    // call()，apply()，bind()。这三个方法都可以调用指定方法，传入改变之后的this指向的对象与方法需要的参数
+    // 调用者都是方法，第一个参数都是改变的this对象
+    // call和bind方法参数都是以应参的形式传递，apply要将方法参数以数组的形式传递
+    // call和apply会立刻调用，bind会返回一个函数对象，需要手动调用如果是定时器那么不需要手动调用，window会自动调用
+    const o = {
+      name: 'Jack'
+    }
+    function method(a, b) {
+      console.log(this)
+      console.log(a + b)
+    }
+    console.log('原始')
+    method()
+    console.log('call()')
+    method.call(o, 1, 2)
+    console.log('apply()')
+    method.apply(o, [1, 2])
+    console.log('bind()')
+    const m = method.bind(o, 1, 2)
+    m()
+  </script>
+</head>
+<body>
+
+</body>
+</html>
