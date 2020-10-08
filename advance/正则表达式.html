@@ -70,9 +70,31 @@
     console.log(reg.test('ab')) //false
     console.log(reg.test('abasd')) //true
     console.log(reg.test('abasdasdasd')) //false
+    // ()表示一个整体, \w表示[a-zA-Z0-9_], \W表示^\w, \d表示[0-9], \D表示^\d, \s表示一些转义字符, \S表示^\s
+    // 座机号码正则表达式 010-83678531 0230-87484235
+    reg = /0[0-9]{1,2}0-\d{8}/
+    // 手机号码匹配
+    reg = /1[3-8]\d{9}/
+    // 字符串的replace方法的第一个参数可以写正则表达式, 去替换匹配到的正则表达式的内容, 但是默认的只是替换了匹配到第一个的内容, 后面的不会被匹配, 此时在正则表达式后面加上g表示全局匹配
+    // 如果加上i则是表示忽略大小写, gi则是即忽略大小写
   </script>
 </head>
 <body>
-
+  <label>
+    <textarea style="width: 350px; height: 150px"></textarea>
+  </label>
+  <button>发送</button>
+  <br/>
+  <span>123456</span>
+  <script>
+    const textarea = document.querySelector('textarea')
+    const button = document.querySelector('button')
+    const span = document.querySelector('span')
+    button.addEventListener('click', () => {
+      let text = textarea.value;
+      text = text.replace(/操|草|你妈|Fuck/gi, '**')
+      span.innerText = text
+    })
+  </script>
 </body>
 </html>
