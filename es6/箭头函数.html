@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>箭头函数</title>
+  <script>
+    // 箭头函数简化了JavaScript函数的声明, 用法与Java的Lambda表达式一致
+    // 在JavaScript中this的指向与方法的调用者有关, 但是箭头函数中的this指向与定义箭头函数的上下文的this指向一致, 不受调用者锁影响
+    let obj = {name: 'Jack'}
+    function method() {
+      console.log(this)
+      return () => {
+        console.log(this)
+      }
+    }
+    // 通过call方法改变method函数里面的this指向, 返回的方法调用者是window对象, this应该指向window对象
+    // 但是由于是用箭头函数声明的方法, 箭头函数内的this不指向方法的调用者, 和定义的上下文的this指向一致
+    // 上下文中的this指向改成了obj, 那么this指向也为obj
+    // 如果是在对象内使用箭头函数, 箭头函数的this指向window, 因为对象不存在作用域, 箭头函数没办法使用对象作用域的this指向, 只能指向全局作用域的this指向即window
+    let call = method.call(obj)
+    call()
+  </script>
+</head>
+<body>
+
+</body>
+</html>

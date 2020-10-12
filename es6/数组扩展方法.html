@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>数组扩展方法</title>
+  <script>
+    let arr = [1, 2, 4, 5, 6]
+    // Array.from将伪数组转成数组, 第二个参数传一个表达式作用与map函数一样
+    // find函数找到数组中第一个满足条件的元素
+    let number = arr.find(item => item >= 5)
+    console.log(number);
+    // findIndex函数返回第一个满足条件的元素的索引
+    let index = arr.findIndex(item => item % 2 === 0)
+    console.log(index);
+    // includes函数判断数组是否包含指定的元素
+    let isIncludes = arr.includes(4)
+    console.log(isIncludes);
+  </script>
+</head>
+<body>
+
+</body>
+</html>

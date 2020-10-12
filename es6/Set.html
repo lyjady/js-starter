@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Set</title>
+  <script>
+    // Es6中新的数据结构Set与Java中的Set类似, 是一种不重复的集合
+    let set = new Set([1, 2, 3, 4])
+    console.log(set.size);
+    // 增加
+    set.add(5)
+    console.log(set)
+    // 查询
+    console.log(set.has(5));
+    // 删除
+    set.delete(5)
+    console.log(set)
+    // 清空
+    set.clear()
+    console.log(set)
+    // set也有forEach函数对集合进行遍历
+  </script>
+</head>
+<body>
+
+</body>
+</html>

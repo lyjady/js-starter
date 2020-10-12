@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>剩余参数</title>
+  <script>
+    // 可以使用...${形参名}的方式接受多个参数, 与Java中的${形参名}...用法一致
+    const sum = (...args) => {
+      console.log(args);
+    }
+    sum(1, 2, 3 ,4)
+    // 剩余参数进行解构数组, 剩下的数据元素会被解构到指定的参数中, 解构的参数类型也是数组类型
+    const [a, ...b] = [1, 2, 3, 4]
+    console.log(a);
+    console.log(b);
+  </script>
+</head>
+<body>
+
+</body>
+</html>
